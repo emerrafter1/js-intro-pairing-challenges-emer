@@ -8,14 +8,14 @@ The function should return an array containing the names of the people who aren'
 Recent intelligence has revealed that all spies codenames include the letters 's', 'p' or 'y'.
 You can't afford to take any chances, and all names that include those letters should be removed.
   if(people[i].includes('s')||people[i].includes('p')||people[i].includes('y'))*/
-let spies =[]
+
  for (let i=people.length-1 ;i>=0;i--){
-  if(people[i].includes('s')||people[i].includes('p')||people[i].includes('y')){
+  if(people[i].toLowerCase().includes('s')||people[i].toLowerCase().includes('p')||people[i].toLowerCase().includes('y')){
   people.splice(i,1)
   }
  } 
 
- return people}
+ return people.sort()}
 
 
 console.log("counterSpy()");
