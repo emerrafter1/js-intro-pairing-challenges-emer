@@ -2,12 +2,13 @@ const { check, runTest, skipTest } = require("../test-api/index.js");
 
 // QUESTION 1
 
-function connectStrings() {
+function connectStrings(str1,str2) {
   // This function should take 2 strings and join them together with a space in between
   // return this newly created string
+  return str1+ ' ' +str2
 }
 
-runTest("connectStrings() can join 2 strings together", function () {
+skipTest("connectStrings() can join 2 strings together", function () {
   check(connectStrings("hello", "world")).isEqualTo("hello world");
   check(connectStrings("paul", "rogerson")).isEqualTo("paul rogerson");
   check(connectStrings("blue", "sky")).isEqualTo("blue sky");
@@ -15,8 +16,8 @@ runTest("connectStrings() can join 2 strings together", function () {
 
 // QUESTION 2
 
-function checkWordEndsWithIng() {
-  // take a string as an argument and return a boolean based on whether the word given ends with 'ing'
+function checkWordEndsWithIng(str) {
+  return str.endsWith('ing')
 }
 
 skipTest(
@@ -31,10 +32,15 @@ skipTest(
 
 // QUESTION 3
 
-function addMissingPunctuation() {
+function addMissingPunctuation(str) {
   // take a string as an argument
   // each string may end with a full-stop, exclamation mark, or question mark
   // if the string doesn't end with punctuation, return the string with a full-stop added at the end. Otherwise, return the string unchanged
+  if(str.endsWith('.')|| str.endsWith('!')||str.endsWith('?')){
+    return str
+  } else {
+    return str + '.'
+  }
 }
 
 skipTest(
@@ -51,8 +57,9 @@ skipTest(
 
 // QUESTION 4
 
-function getRemainder() {
+function getRemainder(a,b) {
   // This function should take two arguments a and b, and return the remainder of the division of a / b
+  return a%b
 }
 
 skipTest("getRemainder() returns the correct remainder", function () {
@@ -66,6 +73,11 @@ skipTest("getRemainder() returns the correct remainder", function () {
 function accessObject(obj, key) {
   // This function should take an object and a key as its arguments and return the value found at the provided key in the input object
   // If the key doesn't exist on the object, this function should return a string of "property not found"
+  if (obj[key]){
+    return obj[key]
+  }else{
+    return 'property not found'
+  }
 }
 
 skipTest("accessObject() can access a property value using a key", function () {
@@ -81,6 +93,9 @@ skipTest("accessObject() can access a property value using a key", function () {
 function makeAllWordsBold(arr) {
   // In markdown files (e.g. 'README.md') we can denote words as bold by putting two asterisks on either side of them, such as: **hello**
   // This function should take an array of strings as an argument and return an array consisting of the same strings but in bold - ie with two asterisks either side of them
+  return arr.map((word)=> {
+    return '**'+word+'**'
+  })
 }
 
 skipTest(
@@ -103,9 +118,12 @@ skipTest(
 
 function getPositiveNumbers(arr) {
   // This function should take an array of numbers as an argument and return an array containing all positive numbers from the input (retaining the order)
+  return arr.filter((number)=> {
+    return number >0
+  })
 }
 
-skipTest(
+runTest(
   "getPositiveNumbers() can get all the positive numbers from an array of numbers",
   function () {
     check(getPositiveNumbers([1, -1, 2, -2, 3, -3])).isEqualTo([1, 2, 3]);
