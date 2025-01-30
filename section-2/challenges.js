@@ -2,13 +2,14 @@ const { check, runTest, skipTest } = require("../test-api/index.js");
 
 // QUESTION 1
 
-function checkSameFinalCharacter() {
+function checkSameFinalCharacter(str1, str2) {
   // This function should take two strings as arguments and return true if their final character is the same or false if not
+  return str1.slice(-1) === str2.slice(-1)
 }
 
 // BONUS POINTS: you can complete this problem without resorting to if statements! Give it a try!
 
-runTest(
+skipTest(
   "checkSameFinalCharacter() checks if two strings end with the same character",
   function () {
     check(checkSameFinalCharacter("hello", "hello")).isEqualTo(true);
@@ -20,8 +21,11 @@ runTest(
 
 // QUESTION 2
 
-function isAllUpperCase() {
+function isAllUpperCase(str) {
   // This function should take a string as an argument and return true if every letter is upper case and false if at least one character is not
+  
+  return str === str.toUpperCase() ? true : false
+
 }
 
 skipTest("isAllUpperCase() checks if every letter is upper case", function () {
@@ -34,7 +38,16 @@ skipTest("isAllUpperCase() checks if every letter is upper case", function () {
 // QUESTION 3
 
 function collectTheVowels(str) {
-  // This function should take a string as its argument and return a string consisting of all vowels found in the input (retaining the order)
+  // // This function should take a string as its argument and return a string consisting of all vowels found in the input (retaining the order)
+  let vowels = ''
+  for (let i = 0; i<str.length; i++){
+    if(str[i] === 'a' || str[i]  === 'i' || str[i]  === 'o' || str[i]  === 'u' || str[i]  === 'e'){
+      vowels += str[i]
+    }
+  }
+
+  return vowels
+
 }
 
 skipTest(
@@ -53,6 +66,16 @@ function accessItem(arr, index) {
   // This function should take two arguments, an array and an index, and return the element at that specified index
   // The index provided may be equal to or greater than the length of the given array. In this case, rather than counting past the end of the array where there are no values, the indexing should be considered to "loop back around" and continue from the start of the array
   // For examples of this behaviour, look at the second group of tests below
+
+  if (index >= arr.length){
+    const finalIndex = index % arr.length
+    return arr[finalIndex]
+  }
+
+  else {
+    return arr[index]
+  }
+  
 }
 
 skipTest(
@@ -78,6 +101,9 @@ skipTest(
 
 function findDayOfTheWeek(num) {
   // This function should take a number from 1 to 7 inclusive, and return a string of the corresponding day of the week
+
+  const daysOfWeek = { 1: "Monday", 2: "Tuesday", 3 : "Wednesday" , 4 : "Thursday", 5 : "Friday", 6: "Saturday", 7: "Sunday"}
+  return daysOfWeek[num]
 }
 
 // BONUS POINTS: Try and solve this without using if statements! Hint: a 'lookup object' might be useful here.
@@ -95,8 +121,9 @@ skipTest(
 
 // QUESTION 6
 
-function createPercentage() {
+function createPercentage(a,b) {
   // This function should take two numbers, a and b, and return a string representing the value of a as a percentage of b
+  return Math.round((a/b)*100) + "%"
 }
 
 skipTest(
@@ -112,11 +139,16 @@ skipTest(
 
 // QUESTION 7
 
-function extractNumber() {
+function extractNumber(num) {
   // This function should take a string containing a number wrapped in a pair of round brackets and return said number
+  //return Number(num.match(regex).join(''))
+  const firstBracket = num.indexOf('(')
+  const lastBracket =num.indexOf(')')
+  const str = num.slice(firstBracket+1, lastBracket)
+  return Number(str)
 }
 
-skipTest(
+runTest(
   "extractNumber() should return the number buried inside a string",
   function () {
     check(extractNumber("lasjdasasj(123)asljdlajk")).isEqualTo(123);
