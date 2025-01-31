@@ -43,13 +43,10 @@ function groupBy(array, key) {
     distinctValues.add(array[i][key])
   }
 
-  console.log(distinctValues)
 
   for(let value of distinctValues){ //create blank arrays with the distinct key
     distinctGroups[value] = []
   }
-
-
 
   for (let i = 0; i<array.length; i++){
     //distinctGroups[]
