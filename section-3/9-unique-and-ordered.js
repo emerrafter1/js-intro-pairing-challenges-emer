@@ -5,7 +5,26 @@ Implement a function which takes as an argument a sequence and returns a list of
 
 The function should be able to to work with both strings and arrays, and should return an array.
 */
-function uniqueAndOrdered() {}
+
+//loop through the array check that the current characters does not equal to the previous character
+//if it is equal slice it out of the array
+// loop backwards through array
+// start at second last digit
+
+
+function uniqueAndOrdered(str) {
+
+  if(typeof str == "string"){
+    str = str.split('')
+  }
+  
+  for (let i = str.length-2; i>=0; i--){
+    if (str[i] === str[i+1]){
+      str.splice(i,1)  
+    }
+  }
+  return str
+}
 
 console.log("uniqueAndOrdered");
 
@@ -13,9 +32,15 @@ runTest("returns unique ordered numbers from an array", function () {
   check(uniqueAndOrdered([1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 1, 1])).isEqualTo([
     1, 2, 3, 1
   ]);
+  check(uniqueAndOrdered([1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 4,5 ])).isEqualTo([
+    1, 2, 3, 4, 5
+  ]);
+  check(uniqueAndOrdered([1, 2, 3, 3])).isEqualTo([
+    1, 2, 3
+  ]);
 });
 
-skipTest("returns unique ordered letters from a string", function () {
+runTest("returns unique ordered letters from a string", function () {
   check(uniqueAndOrdered("nnoorrtthhccooddeerrss")).isEqualTo([
     "n",
     "o",
@@ -31,7 +56,7 @@ skipTest("returns unique ordered letters from a string", function () {
   ]);
 });
 
-skipTest("is case sensitive for strings", function () {
+runTest("is case sensitive for strings", function () {
   check(uniqueAndOrdered("AaAAABBBCCCc")).isEqualTo([
     "A",
     "a",
